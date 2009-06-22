@@ -1,7 +1,56 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "SignedRequest" do
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
+describe SignedRequest do
+  before(:each) do
+    @test_key = 'mykey'
+  end
+
+  describe "sign" do
+    it "should sign the request and return the correct signed key as base64" do
+      params = {
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
+        "callerReference" => "44441234567fdsa44",
+        "expiry" => "10/2014",
+        "status" => "SC"
+      }
+
+      result = SignedRequest.sign(params, @test_key)
+      result.should == "uoOmSftU4gnUMK6Q1ylyGnr5hEw="
+    end
+  end
+
+
+  describe "validate" do
+    it "should return true given a correct request" do
+      good_params = {
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
+        "callerReference" => "44441234567fdsa44",
+        "action" => "amazon_return",
+        "signature" => "uoOmSftU4gnUMK6Q1ylyGnr5hEw=",
+        "controller" => "checkout",
+        "expiry" => "10/2014",
+        "status" => "SC"
+      }
+
+      SignedRequest.validate(good_params, @test_key).should be_true
+    end
+
+    it "should return false if there is no signature given" do
+      good_params_without_signature = {
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
+        "callerReference" => "44441234567fdsa44",
+        "action" => "amazon_return",
+        "controller" => "checkout",
+        "expiry" => "10/2014",
+        "status" => "SC"
+      }
+
+      SignedRequest.validate(good_params_without_signature, @test_key).should be_false
+    end
+
+    it "should return false if there is a bad signature given" do
+      result = SignedRequest.validate({'signature' => 'bad', 'param1' => 'ok'}, @test_key)
+      result.should be_false
+    end
   end
 end
