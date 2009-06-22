@@ -23,7 +23,6 @@ module SignedRequest
     actual_signature == signature
   end
 
-
   private
   def self.strip_keys_from!(hash, *keys)
     keys.each do |key|
