@@ -5,10 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "signed_request"
-    gem.summary = %Q{TODO}
+    gem.summary = %Q{A simple gem that allows you to sign HTTP requests between two parties with a shared secret key.}
     gem.email = "dbalatero@evri.com"
     gem.homepage = "http://github.com/dbalatero/signed_request"
     gem.authors = ["David Balatero"]
+    gem.rubyforge_project = 'evrigems'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 

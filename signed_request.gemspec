@@ -20,14 +20,16 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/signed_request.rb",
+     "signed_request.gemspec",
      "spec/signed_request_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/dbalatero/signed_request}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{evrigems}
   s.rubygems_version = %q{1.3.4}
-  s.summary = %q{TODO}
+  s.summary = %q{A simple gem that allows you to sign HTTP requests between two parties with a shared secret key.}
   s.test_files = [
     "spec/signed_request_spec.rb",
      "spec/spec_helper.rb"
