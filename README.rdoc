@@ -20,7 +20,7 @@ user of this library.
                'param2' => 'bar' }
     signature = SignedRequest.sign(params, key)
     
-    params['signature'] = key
+    params['signature'] = signature
 
     # post it to the receiver.
     req = Net::HTTP::Get.new('/secret/url')
