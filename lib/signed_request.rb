@@ -3,7 +3,7 @@ require 'openssl'
 require 'openssl/digest'
 
 module SignedRequest
-  STRIP_PARAMS = ['action', 'controller'] 
+  STRIP_PARAMS = ['action', 'controller', 'format'] 
 
   # Sign a request on the sending end.
   def self.sign(params, secret_key)
