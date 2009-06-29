@@ -7,6 +7,15 @@ module SignedRequest
 
   # Sign a request on the sending end.
   def self.sign(params, secret_key)
+    params = params.dup
+
+    # Flatten any sub-hashes to a single string.
+    params.keys.each do |key|
+      if params[key].is_a?(Hash)
+        params[key] = params[key].sort_by { |k, v| k.to_s.downcase }.to_s
+      end
+    end
+
     query   = params.sort_by { |k,v| k.to_s.downcase }
     digest  = OpenSSL::Digest::Digest.new('sha1')
     hmac    = OpenSSL::HMAC.digest(digest, secret_key, query.to_s)

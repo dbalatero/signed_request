@@ -17,8 +17,23 @@ describe SignedRequest do
       result = SignedRequest.sign(params, @test_key)
       result.should == "uoOmSftU4gnUMK6Q1ylyGnr5hEw="
     end
-  end
 
+    it "should handle params with hashes as values deterministically" do
+      params = {
+        :user => {
+          :username => 'dbalatero',
+          :password => 'password',
+          :password_confirmation => 'password',
+          :token => 'z883481299kxkldksjkfdsalfdasfdas'
+        }
+      }
+
+      sig = SignedRequest.sign(params, @test_key)
+      20.times do
+        SignedRequest.sign(params.dup, @test_key).should == sig
+      end
+    end
+  end
 
   describe "validate" do
     it "should return true given a correct request" do
