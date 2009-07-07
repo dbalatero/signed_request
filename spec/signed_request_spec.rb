@@ -36,6 +36,24 @@ describe SignedRequest do
   end
 
   describe "validate" do
+    it "should decode params with hashes as values correctly" do
+      params = {
+        :user => {
+          :username => 'dbalatero',
+          :password => 'password',
+          :password_confirmation => 'password',
+          :token => 'z883481299kxkldksjkfdsalfdasfdas'
+        },
+        :test => 'ok'
+      }
+
+      sig = SignedRequest.sign(params, @test_key)
+      params['signature'] = sig
+
+      result = SignedRequest.validate(params, @test_key)
+      result.should be_true
+    end
+
     it "should return true given a correct request" do
       good_params = {
         "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
