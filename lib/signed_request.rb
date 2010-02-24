@@ -24,7 +24,7 @@ module SignedRequest
 
   # Validate an incoming request on the receiving end.
   def self.validate(params, secret_key)
-    signature = params.delete('signature')
+    signature = params.delete('signature') || params.delete(:signature)
     return false if !signature
 
     strip_keys_from!(params, *STRIP_PARAMS)

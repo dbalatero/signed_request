@@ -85,5 +85,22 @@ describe SignedRequest do
       result = SignedRequest.validate({'signature' => 'bad', 'param1' => 'ok'}, @test_key)
       result.should be_false
     end
+
+    describe "validating with different key names" do
+      before(:each) do
+        @params = { :dude => 12345 }
+        @signature = SignedRequest.sign(@params, 'awesome')
+      end
+
+      it "should work with a string key" do
+        result = SignedRequest.validate(@params.merge('signature' => @signature), 'awesome')
+        result.should be_true
+      end
+
+      it "should work with a symbol key" do
+        result = SignedRequest.validate(@params.merge(:signature => @signature), 'awesome')
+        result.should be_true
+      end
+    end
   end
 end
