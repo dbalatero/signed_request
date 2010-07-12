@@ -6,9 +6,21 @@ describe SignedRequest do
   end
 
   describe "sign" do
+    it "should sign the params and path and return the correct signed key as base64" do
+      params = {
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM",
+        "callerReference" => "44441234567fdsa44",
+        "expiry" => "10/2014",
+        "status" => "SC"
+      }
+
+      result = SignedRequest.sign(params, @test_key, :path => '/v1/api/mypath')
+      result.should == "oT/QGLKMPAX3sI3hvFLAK5yyGE8="
+    end
+
     it "should sign the request and return the correct signed key as base64" do
       params = {
-        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM",
         "callerReference" => "44441234567fdsa44",
         "expiry" => "10/2014",
         "status" => "SC"
@@ -56,7 +68,7 @@ describe SignedRequest do
 
     it "should return true given a correct request" do
       good_params = {
-        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM",
         "callerReference" => "44441234567fdsa44",
         "action" => "amazon_return",
         "signature" => "uoOmSftU4gnUMK6Q1ylyGnr5hEw=",
@@ -70,7 +82,7 @@ describe SignedRequest do
 
     it "should return false if there is no signature given" do
       good_params_without_signature = {
-        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM", 
+        "tokenID" => "N1CHGCG13NNB4JMVJN1Q1JXIKBQDO4DQ595NRSCTILAU47P7GA7JVQMMJNXRUJFM",
         "callerReference" => "44441234567fdsa44",
         "action" => "amazon_return",
         "controller" => "checkout",
