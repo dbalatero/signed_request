@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "signed_request"
     gem.summary = %Q{A simple gem that allows you to sign HTTP requests between two parties with a shared secret key.}
-    gem.email = "dbalatero@evri.com"
+    gem.email = "dbalatero@gmail.com"
     gem.homepage = "http://github.com/dbalatero/signed_request"
     gem.authors = ["David Balatero"]
     gem.rubyforge_project = 'evrigems'

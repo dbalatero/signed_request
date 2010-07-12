@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{signed_request}
-  s.version = "1.0.3"
+  s.version = "1.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["David Balatero"]
-  s.date = %q{2010-02-24}
-  s.email = %q{dbalatero@evri.com}
+  s.date = %q{2010-07-12}
+  s.email = %q{dbalatero@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{evrigems}
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{A simple gem that allows you to sign HTTP requests between two parties with a shared secret key.}
   s.test_files = [
     "spec/signed_request_spec.rb",
