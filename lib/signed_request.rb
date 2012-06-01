@@ -1,9 +1,10 @@
+require 'signed_request/version'
+
 require 'base64'
 require 'openssl'
 require 'openssl/digest'
 
 module SignedRequest
-
   class << self
     # Sign a request on the sending end.
     def sign(params, secret_key, options = {})

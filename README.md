@@ -1,6 +1,6 @@
 = signed_request
 
-A simple 25-line gem for signing/verifying an HTTP request that has gone over the wire.
+A simple gem for signing/verifying an HTTP request that has gone over the wire.
 
 The sender and receiver must share the same secret key between them.
 

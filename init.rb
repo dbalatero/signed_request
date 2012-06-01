@@ -1,1 +1,0 @@
-require 'signed_request'
