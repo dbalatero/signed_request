@@ -1,4 +1,4 @@
-= signed_request
+# signed_request
 
 A simple gem for signing/verifying an HTTP request that has gone over the wire.
 
@@ -10,47 +10,50 @@ replay attacks.
 Any key can be used to sign the request -- choosing a secure key is the choice of the
 user of this library.
 
-== Signing a request
+## Signing a request
 
-  require 'signed_request'
+```ruby
+require 'signed_request'
 
-  def send_over_the_wire
-    key = 'mykey'  # insecure, use something else :)
-    params = { 'param1' => 'foo',
-               'param2' => 'bar' }
-    signature = SignedRequest.sign(params, key)
-    
-    params['signature'] = signature
+def send_over_the_wire
+  key = 'mykey'  # insecure, use something else :)
+  params = { 'param1' => 'foo',
+             'param2' => 'bar' }
+  signature = SignedRequest.sign(params, key)
 
-    # post it to the receiver.
-    req = Net::HTTP::Get.new('/secret/url')
-    req.form_data = params
-    http = Net::HTTP.new('mydomain.com', 443)
-    http.use_ssl = true
-    response = http.start do |session|
-      session.request(req)
-    end
+  params['signature'] = signature
 
-    # do something w/ response
+  # post it to the receiver.
+  req = Net::HTTP::Get.new('/secret/url')
+  req.form_data = params
+  http = Net::HTTP.new('mydomain.com', 443)
+  http.use_ssl = true
+  response = http.start do |session|
+    session.request(req)
   end
 
-== Verifying a signed request
+  # do something w/ response
+end
+```
 
-  require 'signed_request'
+## Verifying a signed request
 
-  class SecretController < ApplicationController
-    def verify_request
-      key = 'mykey'
-      
-      if SignedRequest.validate(params, key)
-        # we are good
-      else
-        abort "get the hell out of here!"
-      end
+```ruby
+require 'signed_request'
+
+class SecretController < ApplicationController
+  def verify_request
+    key = 'mykey'
+
+    if SignedRequest.validate(params, key)
+      # we are good
+    else
+      abort "get the hell out of here!"
     end
   end
+end
+```
 
-== Copyright
+## Copyright
 
-Copyright (c) 2009 Evri, Inc
-Authored by David Balatero <dbalatero AT no-spam evri DOT com>. See LICENSE for details.
+Copyright (c) 2009-2012, David Balatero, Rob Hanlon.
